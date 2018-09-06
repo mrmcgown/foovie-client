@@ -1,101 +1,76 @@
-"use strict";
+'use strict'
 
-const store = require("../store");
+const store = require('../store')
+const eventsPlans = require('../plans/events')
+// import swal from 'sweetalert'
+const swal = require('../sweetAlert.js')
+const getPlans = require('../plans/planRequests/getPlans.js')
+const createPlan = require('../plans/planRequests/createPlan.js')
+const editPlan = require('../plans/planRequests/editPlan.js')
+const deletePlan = require('../plans/planRequests/deletePlan.js')
 
-const signUpSuccess = function(data) {
-  $("#message")
-    .text("Signed up successfully")
-    .show()
-    .delay(1500)
-    .fadeOut();
-  $("#message").css("background-color", "green");
-  $("#sign-up")[0].reset();
-  $("#signUp").modal("hide");
-  console.log("signUpSuccess ran. Data is :", data);
-};
+const signUpSuccess = function (data) {
+  $('#signUp').modal('hide')
+  store.user = data.user
+  swal('Good job!', 'You signed up!', 'success')
+}
 
-const signUpFailure = function(error) {
-  $("#message")
-    .text("Error on sign up")
-    .show()
-    .delay(1500)
-    .fadeOut();
-  $("#message").css("background-color", "red");
-  console.log("signUpFailure ran. Error is :", error);
-};
+const signUpFailure = function (error) {
+  if (error) {
+    swal('Oh no!', 'There was an error on sign up.', 'error')
+  }
+}
 
-const signInSuccess = function(data) {
-  // $('#message').html('<div class="alert alert-success"><strong>Success!</strong> You should <a href="#" class="alert-link">read this message</a>.</div>').show()
-  $("#message")
-    .text("Signed in successfully")
-    .show()
-    .delay(1500)
-    .fadeOut();
-  $("#message").css("background-color", "green");
-  $("#sign-in")[0].reset();
-  $("#sign-out, #changePassButton, #options").show();
-  $("#table, #signUpButton, #signInButton").hide();
-  $("#signIn").modal("hide");
-  console.log("signInSuccess ran. Data is :", data);
-  store.user = data.user;
-};
+const signInSuccess = function (data) {
+  $('#sign-in')[0].reset()
+  $(
+    '#table-headers, .plan-changes, #sign-out, #changePassButton, #options, #plans-search, #add-plan, #delete-plan, #update-plan'
+  ).show()
+  $('#table, #signUpButton, #signInButton').hide()
+  $('#signIn').modal('hide')
+  // console.log('signInSuccess ran. Data is :', data)
+  store.user = data.user
+  swal('Welcome', 'You signed in!', 'success')
 
-const signInFailure = function(error) {
-  $("#message")
-    .text("Error on sign in")
-    .show()
-    .delay(1500)
-    .fadeOut();
-  $("#message").css("background-color", "red");
-  console.log("signInFailure ran. Error is :", error);
-};
+  getPlans()
+  // createPlan()
+  editPlan()
+  deletePlan()
+}
 
-const changePasswordSuccess = function(data) {
-  $("#message")
-    .text("Changed password successfully")
-    .show()
-    .delay(1500)
-    .fadeOut();
-  $("#message").css("background-color", "green");
-  $("#change-password")[0].reset();
-  $("#changePassword").modal("hide");
-};
+const signInFailure = function (error) {
+  if (error) {
+    swal('Oh no!', 'There was an error on sign in.', 'error')
+  }
+  console.log('signInFailure ran. Error is :', error)
+}
 
-const changePasswordFailure = function(error) {
-  $("#message")
-    .text("Error on change password")
-    .show()
-    .delay(1500)
-    .fadeOut();
-  $("#message").css("background-color", "red");
-  console.log("changePasswordFailure ran. Error is :", error);
-};
+const changePasswordSuccess = function (data) {
+  $('#change-password')[0].reset()
+  $('#changePassword').modal('hide')
+  swal('Good job!', 'You changed your password!', 'success')
+}
 
-const signOutSuccess = function() {
-  $("#message")
-    .text("Signed out successfully")
-    .show()
-    .delay(1500)
-    .fadeOut();
-  $("#message").css("background-color", "green");
-  $("#table")
-    .find("tr:gt(0)")
-    .remove();
-  $("#sign-out, #changePassButton, #options").hide();
-  $("#signUpButton, #signInButton").show();
-  // $('#content').html('')
-  store.user = null;
-};
+const changePasswordFailure = function (error) {
+  if (error) {
+    swal('Oh no!', 'There was an error changing your password.', 'error')
+  }
+}
 
-const signOutFailure = function(error) {
-  $("#message")
-    .text("Error on sign out")
-    .show()
-    .delay(1500)
-    .fadeOut();
-  $("#message").css("background-color", "red");
-  console.log("signOutFailure ran. Error is :", error);
-};
+const signOutSuccess = function () {
+  $(
+    '#table, #table-headers, .plan-changes, #sign-out, #changePassButton, #options, #plans-search, #add-plan, #delete-plan, #update-plan'
+  ).hide()
+  $('#signUpButton, #signInButton').show()
+  store.user = null
+  swal('Goodbye!', 'You signed out.', 'success')
+}
+
+const signOutFailure = function (error) {
+  if (error) {
+    swal('Oh no!', 'There was an error on sign up.', 'error')
+  }
+}
 
 module.exports = {
   signUpSuccess,
@@ -106,4 +81,4 @@ module.exports = {
   changePasswordFailure,
   signOutFailure,
   signOutSuccess
-};
+}
