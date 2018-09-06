@@ -1,5 +1,5 @@
 const plansStorage = {
-  plans: ''
+  plans: []
 }
 
 module.exports = plansStorage

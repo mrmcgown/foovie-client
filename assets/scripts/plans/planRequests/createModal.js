@@ -1,4 +1,5 @@
 const createPlanModal = () => {
+  $('#createModal').remove()
   $('body').append(`
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

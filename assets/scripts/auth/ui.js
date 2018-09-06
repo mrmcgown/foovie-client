@@ -31,9 +31,9 @@ const signInSuccess = function (data) {
   // console.log('signInSuccess ran. Data is :', data)
   store.user = data.user
   swal('Welcome', 'You signed in!', 'success')
-
   getPlans()
   // createPlan()
+
   editPlan()
   deletePlan()
 }

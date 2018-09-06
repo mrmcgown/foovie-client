@@ -3,18 +3,11 @@ const store = require('../../store')
 const plansStorage = require('./plansStorage.js')
 const plansTable = require('./plansTable.js')
 const getFormFields = require('../../../../lib/get-form-fields.js')
-
+const plans = require('./getPlans')
 const createPlan = () => {
   $('#add-new-plan').on('submit', event => {
     event.preventDefault()
     const serialized = $('#add-new-plan').serializeArray()
-    const planData = {
-      plan: {}
-    }
-    for (let index = 0; index < serialized.length; index++) {
-      planData.plan[serialized[index].name] = serialized[index].value
-    }
-    console.log(planData)
     $.ajax({
       url: config.apiUrl + '/plans',
       method: 'POST',
@@ -22,16 +15,23 @@ const createPlan = () => {
         Authorization: 'Bearer ' + store.user.token
       },
       data: {
-        planData
+        plan: {
+          name: serialized[0].value,
+          food: serialized[1].value,
+          movie: serialized[2].value,
+          date: serialized[3].value,
+          start_time: serialized[4].value,
+          end_time: serialized[5].value
+        }
       }
     })
       .then(data => {
-        plansStorage.plans = data.plans
+        plansStorage.plans.push(data.plan)
         plansTable()
-        console.log(plansStorage)
+        console.log(data)
       })
-      .catch(() => {
-        console.log('error')
+      .catch(err => {
+        console.log(err)
       })
   })
 }
