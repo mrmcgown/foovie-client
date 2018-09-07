@@ -1,113 +1,49 @@
-[![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
+## Foovie Client
 
-# browser-template
+You are currently viewing the frontend repo for Foovie. If you want to view the backend repo, click on the following link: https://github.com/mrmcgown/foovie-api.
 
-A template for starting front-end projects. Webpack for `require` system, build
-pipeline, and development server. Boostrap and Handlebars.js included. No
-front-end frameworks included.
+To view the web app, click on the following link: https://mrmcgown.github.io/foovie-client/.
 
-## Installation
+The server site is located at https://still-hollows-79663.herokuapp.com/.
 
-1. [Download](../../archive/master.zip) this template.
-1. Move to the `wdi/projects` directory, then unzip the template directory with
-    `unzip /Users/<user-name>/Downloads/browser-template-master.zip`.
-1. Rename the template directory from `browser-template-master` to
-    `<project-name>-client`.
-1. Empty [`README.md`](README.md) and fill with your own content.
-1. Replace all instances of `ga-wdi-boston.browser-template` with the name of
-    your project.
-1. Move into the new project and `git init`.
-1. Add all of the files in your project with the command `git add --all`.
-      - **Note: This is the only time you should run this command!**
-1. Commit all of your files with the command `git commit`.
-      - Your commit title should read `Initial commit`.
-1. Install dependencies with `npm install`.
-1. Create a new repository on [github.com](https://github.com),
-    _not GitHub Enterprise_.
-1. Name the new repository with the same name used on Step 3.
-1. Follow the instructions on your new repository's setup page. For details on
-   how to push to Github, refer to the section on Github entitled "…or push an existing
-   repository from the command line." Further documentation can be found [here](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/).
+## Technologies used:
 
-## Structure
+- HTML
+- Bootstrap 4
+- JavaScript
+- jQuery
+- Ajax
+- Node Express
+- MongoDB
 
-Developers should store JavaScript files in [`assets/scripts`](assets/scripts).
-The "manifest" or entry-point is
-[`assets/scripts/app.js`](assets/scripts/app.js). In general, only
-application initialization goes in this file. It's normal for developers to
-start putting all code in this file, but encourage them to break out different
-responsibilities and use the `require` syntax put references where they're
-needed.
+## Unsolved problems:
 
-Developers should set `apiUrls.production` and `apiUrls.development` in
-[`assets/scripts/config.js`](assets/scripts/config.js).  With
-`apiUrls` set, developers may rely on `apiUrl` as the base for API
-URLs.
+- When deleting a plan, clicking the submit button sends an ajax request to delete all id's that have been clicked. This doesn't interfere with the functionality of the application as the previous plans have already been deleted, but it will throw an error in the console. A similar issue can occur when submitting edits to a plan.
 
-Developers should store styles in [`assets/styles`](assets/styles) and load them
-from [`assets/styles/index.scss`](assets/styles/index.scss). Bootstrap version 3 is
-included in this template.
+## Planning:
 
-Developers should use [getFormFields](get-form-fields.md) to retrieve form data
-to send to an API.
+- In developing this app, I began with the user stories, wireframe, and ERD. The idea for the app came from the idea of having a one stop app for creating food and movie plans, so I built into the ERD the idea of having a database of invitations (a future feature). For the backend, I went with Node Express because of its use of JavaScript. I had experience with Ruby on Rails from a previous project, but less comfort with Node Express, so I took advantage of this project to get more practice. The backend as it currently stands is pretty straightforward with users, plans, and ownership requirements. On the frontend, I encountered difficulty with rendering the plans dynamically and incorporating modals with forms. However, the result is better than my past experience of simply including elements in the html and hiding and showing them through use of jQuery depending on the state. Attaching the correct id's of plans to the respectice rows and buttons that are dynamically created also created some small issues which I ultimately resolved.
 
-To deploy a browser-template based SPA, run `grunt deploy`.
+Future features may include incorporating third-party APIs for food and movie selection, invitiation functionality, the ability to mark plans as old and current, and unique styling.
 
-## Adding Images
+## Wireframe:
 
-To add images to your project, you must store them in the `public` directory.
-To use the image in HTML or CSS, write the path to the image like this:
+![alt text](https://i.imgur.com/EXN0Aq8l.jpg?1)
+![alt text](https://i.imgur.com/rTSUbEjl.jpg?1)
 
-```html
-<img src="public/cat.jpg">
-```
-or
-```css
-#my-cool-div {
-  background-image: url('public/cat.jpg')
-}
-```
+## User stories:
 
-Note that there's no `./` or `/` in front of `public/filename.jpg`.
+- As a user, I want to set up an account.
+- As a user, I want to sign in to my account.
+- As a user, I want to be able to change my password.
+- As a user, I want to be able to sign out of my account.
+- As a user, I want to view all of my current plans.
+- As a user, I want to be able to create new plans.
+- As a user, I want to be able to delete my plans.
+- As a user, I want to be able to edit my plans.
 
-## Adding Fonts
+## Screenshots:
 
-To add custom fonts to your app, you can either use a CDN like Google Fonts, or
-you can download the fonts and save them in the `public` directory. If you use
-the former method, follow the directions on the website providing the fonts.
-
-For local fonts, put the files in `public`, and then import and use them in a
-`.scss` file like this:
-
-```scss
-@font-face {
-  font-family: 'Nature Beauty';
-  src: url('public/Nature-Beauty.ttf') format('truetype');
-}
-
-.element-with-custom-font {
-  font-family: 'Nature Beauty';
-}
-```
-
-## Tasks
-
-Developers should run these often!
-
-- `grunt nag` or just `grunt`: runs code quality analysis tools on your code
-    and complains
-- `grunt make-standard`: reformats all your code in the JavaScript Standard Style
-- `grunt <server|serve|s>`: generates bundles, watches, and livereloads
-- `grunt build`: place bundled styles and scripts where `index.html` can find
-    them
-
-## Additional Resources
-
-- [Modern Javascript Explained for Dinosaurs](https://medium.com/@peterxjang/modern-javascript-explained-for-dinosaurs-f695e9747b70)
-- [Making Sense of Front End Build Tools](https://medium.freecodecamp.org/making-sense-of-front-end-build-tools-3a1b3a87043b)
-
-## [License](LICENSE)
-
-1. All content is licensed under a CC­BY­NC­SA 4.0 license.
-1. All software code is licensed under GNU GPLv3. For commercial use or
-    alternative licensing, please contact legal@ga.co.
+![alt text](https://i.imgur.com/eeaG1sll.png)
+![alt text](https://i.imgur.com/BJeUi0Zl.png)
+![alt text](https://i.imgur.com/pBctgLJl.png)
