@@ -1,18 +1,15 @@
 'use strict'
 
 const store = require('../store')
-const eventsPlans = require('../plans/events')
 // import swal from 'sweetalert'
 const swal = require('../sweetAlert.js')
 const getPlans = require('../plans/planRequests/getPlans.js')
-const createPlan = require('../plans/planRequests/createPlan.js')
-const editPlan = require('../plans/planRequests/editPlan.js')
-const deletePlan = require('../plans/planRequests/deletePlan.js')
 
 const signUpSuccess = function (data) {
   $('#signUp').modal('hide')
   store.user = data.user
   swal('Good job!', 'You signed up!', 'success')
+  $('#sign-up')[0].reset()
 }
 
 const signUpFailure = function (error) {
@@ -32,10 +29,6 @@ const signInSuccess = function (data) {
   store.user = data.user
   swal('Welcome', 'You signed in!', 'success')
   getPlans()
-  // createPlan()
-
-  editPlan()
-  deletePlan()
 }
 
 const signInFailure = function (error) {
@@ -63,6 +56,8 @@ const signOutSuccess = function () {
   ).hide()
   $('#signUpButton, #signInButton').show()
   store.user = null
+  $('#plansTable, #add-plan-button').remove()
+
   swal('Goodbye!', 'You signed out.', 'success')
 }
 

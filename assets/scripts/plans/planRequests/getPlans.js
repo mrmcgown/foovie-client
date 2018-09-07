@@ -4,6 +4,11 @@ const plansStorage = require('./plansStorage.js')
 const plansTable = require('./plansTable.js')
 const createModal = require('./createModal.js')
 const createPlan = require('./createPlan.js')
+const editPlan = require('./editPlan.js')
+const editModal = require('./editModal.js')
+const deletePlan = require('./deletePlan.js')
+const deleteModal = require('./deleteModal.js')
+
 const getPlans = () => {
   $.ajax({
     url: config.apiUrl + '/plans',
@@ -13,11 +18,17 @@ const getPlans = () => {
     }
   })
     .then(data => {
-      createModal()
       plansStorage.plans = data.plans
       plansTable()
+    })
+    .then(() => {
+      createModal()
+      editModal()
+      deleteModal()
       createPlan()
-      console.log(data)
+      editPlan()
+      deletePlan()
+      console.log(plansStorage)
     })
     .catch(() => {
       console.log('error')

@@ -1,8 +1,9 @@
 const plansStorage = require('./plansStorage.js')
+
 const plansTable = () => {
-  $('#plansTable').remove()
+  $('#plansTable, #add-plan-button').remove()
   const headTable = `
-<button type="button" data-toggle="modal" data-target="#createModal" style="margin:10px;" class="btn btn-primary" >Add New Plan</button>
+<button type="button" id="add-plan-button" data-toggle="modal" data-target="#createModal" style="margin:10px;" class="btn btn-primary" >Add New Plan</button>
 <table class="table" id="plansTable">
 <thead>
 <tr>
@@ -29,11 +30,10 @@ const plansTable = () => {
       <td>${plansStorage.plans[index].end_time}</td>
       <td>${plansStorage.plans[index].food}</td>
       <td>${plansStorage.plans[index].movie}</td>
-      <td>
-        <button type="button" id='${
+      <td>  <button type="button" data-toggle="modal" data-target="#editModal" id='plan-${
   plansStorage.plans[index]._id
 }' class="btn btn-warning">Edit</button>
-        <button type="button" id='${
+        <button type="button" data-toggle="modal" data-target="#deleteModal" id='deletePlan-${
   plansStorage.plans[index]._id
 }' class="btn btn-danger">Delete</button>
       </td>
