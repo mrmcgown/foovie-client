@@ -4,7 +4,7 @@ const getFormFields = require('../../../lib/get-form-fields')
 
 const api = require('./api')
 const ui = require('./ui')
-
+const createPlan = require('../plans/planRequests/createPlan')
 const onSignUp = function (event) {
   event.preventDefault()
   console.log('sign up ran!')
@@ -12,7 +12,8 @@ const onSignUp = function (event) {
   const data = getFormFields(this)
   // console.log(this)
   // console.log(data)
-  api.signUp(data)
+  api
+    .signUp(data)
     .then(ui.signUpSuccess)
     .catch(ui.signUpFailure)
 }
@@ -24,7 +25,8 @@ const onSignIn = function (event) {
   const data = getFormFields(this)
   // console.log(this)
   // console.log(data)
-  api.signIn(data)
+  api
+    .signIn(data)
     .then(ui.signInSuccess)
     .catch(ui.signInFailure)
 }
@@ -35,7 +37,8 @@ const onChangePassword = function (event) {
 
   const data = getFormFields(this)
 
-  api.changePassword(data)
+  api
+    .changePassword(data)
     .then(ui.changePasswordSuccess)
     .catch(ui.changePasswordFailure)
 }
@@ -43,7 +46,8 @@ const onChangePassword = function (event) {
 const onSignOut = function (event) {
   event.preventDefault()
   // console.log('signout ran')
-  api.signOut()
+  api
+    .signOut()
     .then(ui.signOutSuccess)
     .catch(ui.signOutFailure)
 }
@@ -53,7 +57,9 @@ const addHandlers = () => {
   $('#sign-in').on('submit', onSignIn)
   $('#change-password').on('submit', onChangePassword)
   $('#sign-out').on('click', onSignOut)
-  $('#sign-out, #changePassButton, #options').hide()
+  $(
+    '#table, .plan-changes, #sign-out, #changePassButton, #options, #plans-search, #add-plan, #delete-plan, #update-plan'
+  ).hide()
 }
 
 module.exports = {
