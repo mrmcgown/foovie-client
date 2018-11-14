@@ -10,6 +10,7 @@ const deletePlan = () => {
     e.preventDefault()
     const id = e.target.id.replace('deletePlan-', '')
     console.log(`on button click, id: ${id}`)
+    $('#delete-button').off('click')
     $('#delete-button').on('click', event => {
       // event.preventDefault()
       console.log(`on submit, id: ${id}`)
